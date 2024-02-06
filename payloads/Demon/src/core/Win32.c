@@ -1035,9 +1035,14 @@ VOID AnonPipesRead(
     } while ( Success == TRUE );
 
     if ( dwBufferSize ) {
-        Package = PackageCreateWithRequestID( DEMON_OUTPUT, RequestID );
-        PackageAddBytes( Package, Buffer, dwBufferSize );
+        LPVOID BufferW = Instance->Win32.LocalAlloc( LPTR, dwBufferSize*2 );
+        DWORD  SizeW   = Instance->Win32.MultiByteToWideChar( CP_OEMCP, 0, Buffer, dwBufferSize, BufferW, dwBufferSize*2 );
+
+        PPACKAGE Package = PackageCreateWithRequestID( DEMON_OUTPUTW, RequestID );
+        PackageAddBytes( Package, BufferW, SizeW*2);
         PackageTransmit( Package );
+
+        DATA_FREE( BufferW, dwBufferSize*2 )
     }
 
     DATA_FREE( Buffer, dwBufferSize );

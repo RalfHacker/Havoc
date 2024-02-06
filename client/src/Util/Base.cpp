@@ -57,7 +57,7 @@ auto WinVersionIcon( QString OSVersion, bool High ) -> QIcon
         else
             return QIcon( ":/images/winxp" );
     }
-    if ( OSVersion.startsWith( "Windows 8" ) || OSVersion.startsWith( "Windows Server 2012" ) )
+    if ( OSVersion.startsWith( "Windows 8" ) || OSVersion.startsWith( "Windows Server 2012" ) || OSVersion.startsWith( "Windows Server 2016" ) )
     {
         spdlog::debug( "OSVersion is Windows 8" );
 
@@ -66,7 +66,7 @@ auto WinVersionIcon( QString OSVersion, bool High ) -> QIcon
         else
             return QIcon( ":/images/win10-8" );
     }
-    if ( OSVersion.startsWith( "Windows 11" )  )
+    if ( OSVersion.startsWith( "Windows 11" )  || OSVersion.startsWith( "Windows Server 2022" ) )
     {
         spdlog::debug( "OSVersion is Windows 11" );
 
@@ -113,7 +113,7 @@ auto WinVersionIcon( QString OSVersion, bool High ) -> QIcon
 
 auto WinVersionImage( QString OSVersion, bool High ) -> QImage
 {
-    if ( OSVersion.startsWith( "Windows 10" )  )
+    if ( OSVersion.startsWith( "Windows 10" ) || OSVersion.startsWith( "Windows Server 2019" ) || OSVersion.startsWith( "Windows 2019 Server" ) )
     {
         spdlog::debug( "OSVersion is Windows 10" );
 
@@ -131,7 +131,7 @@ auto WinVersionImage( QString OSVersion, bool High ) -> QImage
         else
             return QImage( ":/images/winxp" );
     }
-    if ( OSVersion.startsWith( "Windows 8" )  )
+    if ( OSVersion.startsWith( "Windows 8" ) || OSVersion.startsWith( "Windows Server 2016" ) || OSVersion.startsWith( "Windows Server 2012" ) )
     {
         spdlog::debug( "OSVersion is Windows 8" );
 
@@ -140,7 +140,7 @@ auto WinVersionImage( QString OSVersion, bool High ) -> QImage
         else
             return QImage( ":/images/win10-8" );
     }
-    if ( OSVersion.startsWith( "Windows 11" )  )
+    if ( OSVersion.startsWith( "Windows 11" ) || OSVersion.startsWith( "Windows Server 2022" ) )
     {
         spdlog::debug( "OSVersion is Windows 11" );
 

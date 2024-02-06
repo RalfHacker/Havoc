@@ -413,7 +413,7 @@ func ParseDemonRegisterRequest(AgentID int, Parser *parser.Parser, ExternalIP st
 			}
 
 			Hostname = Parser.ParseString()
-			Username = Parser.ParseString()
+			Username = Parser.ParseUTF16String()
 			DomainName = Parser.ParseString()
 			InternalIP = Parser.ParseString()
 

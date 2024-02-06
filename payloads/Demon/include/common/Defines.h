@@ -157,6 +157,7 @@
 #define H_FUNC_CONVERTFIBERTOTHREAD                  0x11b30049
 #define H_FUNC_CREATEFIBEREX                         0x7b94a3fe
 #define H_FUNC_READFILE                              0x84d15061
+#define H_FUNC_MULTIBYTETOWIDECHAR                   0xa3c8f4ce
 #define H_FUNC_VIRTUALALLOCEX                        0x5775bd54
 #define H_FUNC_WAITFORSINGLEOBJECTEX                 0x512e1b97
 #define H_FUNC_GETCOMPUTERNAMEEXA                    0xec725c53
@@ -204,7 +205,7 @@
 #define H_FUNC_CREATEPROCESSWITHTOKENW               0xf3e5480c
 #define H_FUNC_CREATEPROCESSWITHLOGONW               0xe139fc0a
 #define H_FUNC_REVERTTOSELF                          0x7292758a
-#define H_FUNC_GETUSERNAMEA                          0xfca17e46
+#define H_FUNC_GETUSERNAMEW                          0xfca17e5c
 #define H_FUNC_LOGONUSERW                            0x5ed5d61a
 #define H_FUNC_LOOKUPACCOUNTSIDA                     0xd51fdf8d
 #define H_FUNC_LOOKUPACCOUNTSIDW                     0xd51fdfa3

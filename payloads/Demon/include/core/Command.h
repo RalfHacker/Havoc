@@ -31,6 +31,7 @@
 
 #define DEMON_INFO                      89
 #define DEMON_OUTPUT                    90
+#define DEMON_OUTPUTW                   9000
 #define DEMON_ERROR                     91
 #define DEMON_EXIT                      92
 #define DEMON_KILL_DATE                 93

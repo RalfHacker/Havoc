@@ -28,7 +28,7 @@ BOOL RtAdvapi32(
         Instance->Win32.CreateProcessWithTokenW      = LdrFunctionAddr( Instance->Modules.Advapi32, H_FUNC_CREATEPROCESSWITHTOKENW );
         Instance->Win32.CreateProcessWithLogonW      = LdrFunctionAddr( Instance->Modules.Advapi32, H_FUNC_CREATEPROCESSWITHLOGONW );
         Instance->Win32.RevertToSelf                 = LdrFunctionAddr( Instance->Modules.Advapi32, H_FUNC_REVERTTOSELF );
-        Instance->Win32.GetUserNameA                 = LdrFunctionAddr( Instance->Modules.Advapi32, H_FUNC_GETUSERNAMEA );
+        Instance->Win32.GetUserNameW                 = LdrFunctionAddr( Instance->Modules.Advapi32, H_FUNC_GETUSERNAMEW );
         Instance->Win32.LogonUserW                   = LdrFunctionAddr( Instance->Modules.Advapi32, H_FUNC_LOGONUSERW );
         Instance->Win32.LookupPrivilegeValueA        = LdrFunctionAddr( Instance->Modules.Advapi32, H_FUNC_LOOKUPPRIVILEGEVALUEA );
         Instance->Win32.LookupAccountSidA            = LdrFunctionAddr( Instance->Modules.Advapi32, H_FUNC_LOOKUPACCOUNTSIDA );

